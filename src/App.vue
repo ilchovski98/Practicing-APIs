@@ -1,13 +1,37 @@
 <template>
   <div id="app">
-    <card></card>
-    <fetcher :url="url1"></fetcher>
+    
+    <fetcher class="space" :url="url1">
+      <template #default="{ apiData }">
+        <card>{{ apiData.name }}</card>
+      </template>
+    </fetcher>
+
+    <fetcher class="space" :url="url2">
+      <template #default="{ apiData }">
+        <card>{{ apiData.name }}</card>
+      </template>
+    </fetcher>
+
+    <fetcher class="space" :url="url3">
+      <template #default="{ apiData }">
+        <card>{{ apiData.name }}</card>
+      </template>
+    </fetcher>
+
+    <fetcher class="space" :url="url4">
+      <template #default="{ apiData }">
+        <card>{{ apiData.name }}</card>
+      </template>
+    </fetcher>
   </div>
 </template>
 
 <script>
 import Card from './components/card'
 import Fetcher from './components/fetcher'
+import "bootstrap/dist/css/bootstrap.min.css"
+
 
 export default {
   name: 'App',
@@ -34,5 +58,11 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.space {
+  margin: 20px;
 }
 </style>
