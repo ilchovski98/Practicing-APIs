@@ -1,17 +1,27 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <card></card>
+    <fetcher :url="url1"></fetcher>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Card from './components/card'
+import Fetcher from './components/fetcher'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Card,
+    Fetcher
+  },
+  data() {
+    return {
+      url1: 'https://swapi.dev/api/planets/1/',
+      url2: 'https://swapi.dev/api/planets/2/',
+      url3: 'https://swapi.dev/api/planets/3/',
+      url4: 'https://swapi.dev/api/planets/4/'
+    }
   }
 }
 </script>
