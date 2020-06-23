@@ -1,4 +1,4 @@
-# multiple-api
+# Practicing APIs
 
 ## Project setup
 ```
