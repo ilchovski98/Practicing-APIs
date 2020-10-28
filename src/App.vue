@@ -1,27 +1,26 @@
 <template>
   <div id="app">
-    
+    <Header></Header>
+
+    <HeaderSecondary>
+      <fetcher class="space" :url="url1">
+        <template #default="{ apiData }">
+          <span>{{ apiData.current_price }}</span>
+        </template>
+      </fetcher>
+    </HeaderSecondary>
+
     <fetcher class="space" :url="url1">
       <template #default="{ apiData }">
-        <card>{{ apiData.name }}</card>
-      </template>
-    </fetcher>
+        <card>
+          <template v-slot:card__name>
+            {{ apiData.name }}
+          </template>
 
-    <fetcher class="space" :url="url2">
-      <template #default="{ apiData }">
-        <card>{{ apiData.name }}</card>
-      </template>
-    </fetcher>
-
-    <fetcher class="space" :url="url3">
-      <template #default="{ apiData }">
-        <card>{{ apiData.name }}</card>
-      </template>
-    </fetcher>
-
-    <fetcher class="space" :url="url4">
-      <template #default="{ apiData }">
-        <card>{{ apiData.name }}</card>
+          <template v-slot:card__price>
+            {{ apiData.current_price }} $
+          </template>
+        </card>
       </template>
     </fetcher>
   </div>
@@ -29,19 +28,24 @@
 
 <script>
 import Card from './components/card'
+import Header from './components/header'
+import HeaderSecondary from './components/header-secondary'
 import Fetcher from './components/fetcher'
+// import StockPreview from './components/stock-preview'
 import "bootstrap/dist/css/bootstrap.min.css"
-
 
 export default {
   name: 'App',
   components: {
     Card,
-    Fetcher
+    Fetcher,
+    Header,
+    HeaderSecondary,
+    // StockPreview
   },
   data() {
     return {
-      url1: 'https://swapi.dev/api/planets/1/',
+      url1: 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false',
       url2: 'https://swapi.dev/api/planets/2/',
       url3: 'https://swapi.dev/api/planets/3/',
       url4: 'https://swapi.dev/api/planets/4/'
@@ -53,16 +57,5 @@ export default {
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.space {
-  margin: 20px;
 }
 </style>

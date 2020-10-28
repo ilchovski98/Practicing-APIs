@@ -11,13 +11,21 @@ export default {
     props: ['url'],
     data() {
         return {
-            apiData: ''
+            apiData: '',
+            timer: ''
         }
     },
-    mounted() {
-        axios.get(this.url).then(response => {
-            this.apiData = response.data
-        })
+    created () {
+        this.fetchEventsList();
+        this.timer = setInterval(this.fetchEventsList, 70000)
+    },
+    methods: {
+        fetchEventsList() {
+            axios.get(this.url).then(response => {
+                this.apiData = response.data[0];
+                console.log(response.data[0]);
+            })
+        }
     }
 }
 </script>
